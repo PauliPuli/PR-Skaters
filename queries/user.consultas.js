@@ -1,19 +1,5 @@
 import pool from "../config/skateDb.js";
 
-export const addParticipante = async (data) => {
-  try {
-    let sql = {
-      text: `insert into skaters(email,nombre,password,anos_experiencia,especialidad,foto,estado) values ($1,$2,$3,$4,$5,$6,'false')returning *`,
-      values: data
-    };
-    const resp = await pool.query(sql);
-    console.log("Participante agregado con éxito");
-    return resp.rows;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
 export const getParticipantes = async () => {
   try {
     let sql = {
@@ -26,3 +12,43 @@ export const getParticipantes = async () => {
     console.log(error.message);
   }
 };
+
+export const addParticipante = async (data) => {
+  try {
+    let sql = {
+      text: `insert into skaters(email,nombre,password,anos_experiencia,especialidad,foto,estado) values ($1,$2,$3,$4,$5,$6,'false')returning *`,
+      values: data
+    };
+    const resp = await pool.query(sql);
+    console.log("Participante agregado con éxito");
+    return resp.rows[0];
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const editParticipante=async(data)=>{
+  try{
+    let sql={
+      text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where id=$3 returning *`,
+      values:data
+    }
+    const resp = await pool.query(sql);
+    return resp.rows;
+  }catch(error){
+    console.log(error.message);
+  }
+};
+
+export const deleteParticipante=async(id)=>{
+  try{
+    const sql={
+      text: "delete from skaters where id= $1",
+      values: [id],
+    };
+   const resp= await pool.query(sql)
+return resp.rows
+  }catch(error){
+    console.log(error.message);
+  }
+}

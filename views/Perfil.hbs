@@ -43,7 +43,7 @@
     const deleteBtn = document.getElementById("deleteBtn")
 
     const id = `{{skater.id}}`
-    deleteBtn.addEventListener("click", async () => {
+    deleteBtn.addEventListener("click", async () =>{
 
         try {
             const { data: token } = await axios.delete(`/skaters/${id}`)
