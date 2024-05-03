@@ -1,6 +1,6 @@
 
 import {
-  getParticipantes,
+  getParticipantes
 } from "../queries/user.consultas.js";
 
 
@@ -10,18 +10,12 @@ export const home = async(req,res)=>{
   res.render("Home", {skaters});
 };
 export const registro = async(req,res)=>{  
-
-  res.render("Registro");
+res.render("Registro");
 };
 
-export const perfil = (req,res)=>{
-  res.render("Perfil");
-};
-export const login = (req,res)=>{
+export const login = async(req,res)=>{
   res.render("Login");
 };
 
 
-export const admin = (req,res)=>{
-  res.render("Admin");
-};
+

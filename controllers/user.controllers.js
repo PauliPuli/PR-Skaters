@@ -52,7 +52,7 @@ export const editarParticipante=async(req, res) => {
 
 export const borrarParticipante=async (req,res)=>{
   try{
-    const { id } = req.query; //captura por url
+    const { id } = req.params; //captura por url
 await deleteParticipante(id);
     res.send("Eliminado");
   }catch(error){

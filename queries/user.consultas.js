@@ -13,6 +13,20 @@ export const getParticipantes = async () => {
   }
 };
 
+export const selectParticipante=async(email,password)=>{
+  console.log(email,password)
+  try {
+    let sql = {
+      text: `select * from skaters where email='${email}' and password='${password}'`,
+    };
+    const resp = await pool.query(sql);
+    console.log(resp.rows[0],'objeto');
+    return resp.rows[0];
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export const addParticipante = async (data) => {
   try {
     let sql = {

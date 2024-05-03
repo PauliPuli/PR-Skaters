@@ -7,16 +7,6 @@ import router from "./routes/routes.js";
 import path from "path";
 import fileUpload from 'express-fileupload'
 
-// //motor de plantilla
-app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
-app.engine('hbs', engine({
-    defaultLayout: 'main',
-    extname: 'hbs',
-    layoutsDir: path.join(__dirname, 'views/layouts'), 
-}));
-
-
 // Middlewares
 app.use(express.json());
 app.use(express.static('public'));
@@ -32,6 +22,18 @@ app.use(
   ); 
   app.use(express.urlencoded({ extended: false }));
   app.use("/",router);
+  
+// //motor de plantilla
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
+app.engine('hbs', engine({
+    defaultLayout: 'main',
+    extname: 'hbs',
+    layoutsDir: path.join(__dirname, 'views/layouts'), 
+}));
+
+
+
 //Llamada servidor
 app.listen(PORT,()=>{
     console.log(`Server running on Port http://localhost:${PORT}`)
