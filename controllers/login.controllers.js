@@ -4,12 +4,15 @@ process.loadEnvFile();
 import {getParticipantes, selectParticipante} from "../queries/user.consultas.js";
 
 export const iniciarSesion = async (req, res) => {
-  const { email, password } = req.body;
-console.log(email,password)
+
+
   try {
+
+    const { email, password } = req.body;
+    console.log(email,password)
     const secretKey = process.env.SECRET_KEY;
     const skater = await selectParticipante(email, password);
-    const token = jwt.sign(skater, secretKey, { expiresIn: "1m" });
+    const token = jwt.sign(skater, secretKey, { expiresIn: "5m" });
     console.log(token)
     res.status(200).send(token);
   } catch (error) {
@@ -34,7 +37,7 @@ export const validarToken = async (req, res) => {
         code: 500,
       });
     } else {
-      res.render('Perfil', { skater });
+      res.render('Perfil',  {skater} );
     }
   });
 };

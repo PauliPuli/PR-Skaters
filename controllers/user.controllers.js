@@ -25,7 +25,7 @@ export const agregarParticipante = async (req, res) => {
     }
     try {
       await addParticipante(data);
-      res.status(201).send("Participante agregado correctamente");
+      res.status(201).redirect("/");
     } catch (error) {
       res.status(500).send(error.message);
     }
