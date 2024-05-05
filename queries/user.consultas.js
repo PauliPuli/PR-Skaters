@@ -47,7 +47,6 @@ export const editParticipante=async(data)=>{
       text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where id='${id}' returning *`,
       values:data
     }
-    console.log(skater.email,)
     const resp = await pool.query(sql);
     return resp.rows[0];
   }catch(error){
@@ -67,3 +66,18 @@ return resp.rows
     console.log(error.message);
   }
 }
+
+export const editStatus=async(id,estado)=>{
+  try{
+    console.log(typeof(id))
+    console.log(typeof(estado))
+    let sql={
+      text:`update skaters set estado=${estado} where id=${id} returning *`
+    }
+    console.log(estado)
+    const resp = await pool.query(sql);
+    return resp.rows[0];
+  }catch(error){
+    console.log(error.message);
+  }
+};

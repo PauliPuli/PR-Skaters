@@ -5,6 +5,7 @@ body {
   font-family: sans-serif;
   text-align: center;
   padding: 40px 100px;
+  background-image: url('/img/background-2.jpg');
 }
 
 h1 {

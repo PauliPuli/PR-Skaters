@@ -1,11 +1,14 @@
-
-import { addParticipante, deleteParticipante, editParticipante} from "../queries/user.consultas.js";
+import {
+  addParticipante,
+  deleteParticipante,
+  editParticipante,
+  editStatus
+} from "../queries/user.consultas.js";
 
 export const agregarParticipante = async (req, res) => {
-  const { email, nombre, password, anos_experiencia, especialidad} =
-    req.body
+  const { email, nombre, password, anos_experiencia, especialidad } = req.body;
   const { foto } = req.files;
-  const { name } = foto;  
+  const { name } = foto;
   const titulo = `${name}`;
   const uploadPath = `/uploads/${titulo}`;
   const data = [
@@ -14,7 +17,7 @@ export const agregarParticipante = async (req, res) => {
     password,
     anos_experiencia,
     especialidad,
-    uploadPath
+    uploadPath,
   ];
   console.log(data);
   foto.mv(`public${uploadPath}`, async (err) => {
@@ -30,30 +33,36 @@ export const agregarParticipante = async (req, res) => {
   });
 };
 
-export const editarParticipante=async(req, res) => {
-  try{
-    const {id}=req.params;
-  const {nombre, password, anos_experiencia, especialidad} =req.body;
-    const data = [
-      nombre,
-      password,
-      anos_experiencia,
-      especialidad
-    ];
+export const editarParticipante = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nombre, password, anos_experiencia, especialidad } = req.body;
+    const data = [nombre, password, anos_experiencia, especialidad];
     await editParticipante(data);
     res.send("Los cambios se han realizado con éxito");
-  }catch(error){
+  } catch (error) {
     res.status(500).send(error.message);
   }
 };
 
-export const borrarParticipante=async (req,res)=>{
-  try{
+export const borrarParticipante = async (req, res) => {
+  try {
     const { id } = req.params; //captura por url
-await deleteParticipante(id);
+    await deleteParticipante(id);
     res.send("Eliminado");
-  }catch(error){
+  } catch (error) {
     res.status(500).send(error.message);
   }
-}
+};
 
+export const editarStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
+
+    await editStatus(id,estado);
+    res.send("Los cambios se han realizado con éxito");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
