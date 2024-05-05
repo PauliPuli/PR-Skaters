@@ -1,8 +1,6 @@
 
 import { addParticipante, deleteParticipante, editParticipante} from "../queries/user.consultas.js";
 
-
-
 export const agregarParticipante = async (req, res) => {
   const { email, nombre, password, anos_experiencia, especialidad} =
     req.body
@@ -25,7 +23,7 @@ export const agregarParticipante = async (req, res) => {
     }
     try {
       await addParticipante(data);
-      res.status(201).redirect("/");
+      res.status(201).redirect("/login");
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -34,17 +32,16 @@ export const agregarParticipante = async (req, res) => {
 
 export const editarParticipante=async(req, res) => {
   try{
-  const {id, nombre, password, anos_experiencia, especialidad} =
-    req.body;
+    const {id}=req.params;
+  const {nombre, password, anos_experiencia, especialidad} =req.body;
     const data = [
-      id,
       nombre,
       password,
       anos_experiencia,
       especialidad
     ];
     await editParticipante(data);
-    res.send("Cambios realizado con éxito");
+    res.send("Los cambios se han realizado con éxito");
   }catch(error){
     res.status(500).send(error.message);
   }

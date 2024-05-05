@@ -20,7 +20,7 @@ export const selectParticipante=async(email,password)=>{
       text: `select * from skaters where email='${email}' and password='${password}'`
     };
     const resp = await pool.query(sql);
-    console.log(resp.rows[0],'objeto');
+    // console.log(resp.rows[0],'objeto');
     return resp.rows[0];
   } catch (error) {
     console.log(error.message);
@@ -44,11 +44,12 @@ export const addParticipante = async (data) => {
 export const editParticipante=async(data)=>{
   try{
     let sql={
-      text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where id=$3 returning *`,
+      text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where id='${id}' returning *`,
       values:data
     }
+    console.log(skater.email,)
     const resp = await pool.query(sql);
-    return resp.rows;
+    return resp.rows[0];
   }catch(error){
     console.log(error.message);
   }

@@ -9,11 +9,11 @@ export const iniciarSesion = async (req, res) => {
   try {
 
     const { email, password } = req.body;
-    console.log(email,password)
+    // console.log(email,password)
     const secretKey = process.env.SECRET_KEY;
     const skater = await selectParticipante(email, password);
     const token = jwt.sign(skater, secretKey, { expiresIn: "5m" });
-    console.log(token)
+    // console.log(token)
     res.status(200).send(token);
   } catch (error) {
     console.log(error.message);
