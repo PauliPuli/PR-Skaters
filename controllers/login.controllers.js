@@ -42,24 +42,3 @@ export const validarToken = async (req, res) => {
   });
 };
 
-//`<h1>⚠</h1><h2>Usuario o contraseña incorrecta</h2><a href="/"><button class="boton" type="button">Volver a inicio</button></a><style>
-// * {
-//   margin: 0;
-//   padding: 0;
-// }
-// body {
-//   background: #1c1c1c;
-//   color: yellow;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   flex-direction: column;
-//   height: 60vh;
-//   font-family: monospace
-// }
-// .boton{
-//   margin: 10px;
-//   padding: 10px;
-//   background: #FFC107
-// }
-// </style>`
