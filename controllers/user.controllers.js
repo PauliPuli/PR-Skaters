@@ -35,9 +35,9 @@ export const agregarParticipante = async (req, res) => {
 
 export const editarParticipante = async (req, res) => {
   try {
-    const { id } = req.params;
+    // const { email } = req.query;
     const { nombre, password, anos_experiencia, especialidad } = req.body;
-    const data = [nombre, password, anos_experiencia, especialidad];
+    const data = [nombre, password, anos_experiencia, especialidad, email];
     await editParticipante(data);
     res.send("Los cambios se han realizado con éxito");
   } catch (error) {

@@ -44,7 +44,7 @@ export const addParticipante = async (data) => {
 export const editParticipante=async(data)=>{
   try{
     let sql={
-      text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where id='${id}' returning *`,
+      text:`update skaters set nombre=$1, password=$2, anos_experiencia=$3, especialidad=$4 where email=$5 returning *`,
       values:data
     }
     const resp = await pool.query(sql);
